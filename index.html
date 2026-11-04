@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meong! Kenalan dengan Kucing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--sun:#FFE14D;--sunl:#FFF6B8;--pink:#FF6FB1;--pinkl:#FFD3E8;--sky:#4FC9FF;--skyl:#CDEFFF;--mint:#6EEBB0;--mintl:#D2FBE8;--lilac:#C7A6FF;--lilacl:#EADDFF;--fur:#FF9A3C;--ink:#3B2E7E;--card:#fff;--bg:#FFFDF0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.6 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:"Baloo 2",system-ui,sans-serif;line-height:1.05;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+nav{position:sticky;top:0;z-index:5;background:var(--sunl);border-bottom:3px solid var(--ink);padding-top:env(safe-area-inset-top,0px)}
+nav .wrap{display:flex;gap:6px 18px;align-items:center;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+nav b{font:800 1.3rem "Baloo 2",sans-serif;margin-right:auto}
+nav a{color:var(--ink);font-weight:700;text-decoration:none;font-size:.95rem}
+nav a:hover{text-decoration:underline wavy var(--pink)}
+.hero{background:var(--sun);padding:36px 0 70px;border-radius:0 0 40px 40px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,7vw,4.8rem);font-weight:800}
+.hero p{max-width:34ch;font-size:1.15rem}
+.dot{position:absolute;border-radius:50%;z-index:0}
+.hero .wrap{position:relative;z-index:1}
+.btn{display:inline-block;background:var(--pink);color:var(--ink);border:3px solid var(--ink);font:800 1.1rem "Baloo 2",sans-serif;padding:10px 26px;border-radius:99px;text-decoration:none;box-shadow:0 5px 0 var(--ink);transition:transform .15s}
+.btn:hover{transform:translateY(-2px) rotate(-2deg)}
+.catbox{position:relative;text-align:center}
+.catbox svg{width:min(100%,380px);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.bubble{position:absolute;top:2%;right:4%;background:#fff;border:3px solid var(--ink);padding:6px 16px;border-radius:20px 20px 20px 4px;font:800 1.1rem "Baloo 2",sans-serif;transform:scale(0);transform-origin:bottom left;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.bubble.on{transform:scale(1)}
+.hint{font-size:.9rem}
+.tail{transform-origin:300px 330px;animation:sway 2.4s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(10deg)}}
+.blink{animation:blink 4.5s infinite;transform-origin:center;transform-box:fill-box}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+
+section{padding:64px 0 56px}
+.band1{background:var(--pinkl);border-radius:40px;margin:30px 0}
+.band2{background:var(--skyl);border-radius:40px;margin:30px 0}
+.band3{background:var(--mintl);border-radius:40px;margin:30px 0}
+.band4{background:var(--lilacl);border-radius:40px;margin:30px 0}
+section h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:8px}
+.lead{max-width:56ch;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:26px;padding:20px;box-shadow:6px 6px 0 var(--c,var(--pink))}
+.card h3{font-size:1.4rem;margin:4px 0}
+.card p{margin:4px 0 0}
+button.card{all:unset;box-sizing:border-box;cursor:pointer;display:block;background:var(--card);border:3px solid var(--ink);border-radius:26px;padding:20px;box-shadow:6px 6px 0 var(--c);transition:transform .15s}
+button.card:hover{transform:translate(-2px,-2px) rotate(-1deg)}
+button.card:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+button.card h3{font-size:1.4rem;margin:4px 0}
+button.card .em{font-size:2.6rem;display:block}
+button.card .arti{display:none;margin-top:8px;padding-top:8px;border-top:3px dashed var(--ink)}
+button.card[aria-expanded="true"] .arti{display:block}
+button.card[aria-expanded="true"]{transform:rotate(1.2deg)}
+.c0{--c:var(--pink)}.c1{--c:var(--sky)}.c2{--c:var(--mint)}.c3{--c:var(--sun)}.c4{--c:var(--lilac)}.c5{--c:var(--fur)}
+.face{width:110px;height:110px;display:block;margin:0 auto 6px}
+
+.tailsec{background:var(--card);border:3px solid var(--ink);border-radius:32px;padding:26px;display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:center;box-shadow:8px 8px 0 var(--sky)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tabs button,.opt{font:800 1rem "Baloo 2",sans-serif;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:99px;padding:6px 16px;cursor:pointer}
+.tabs button[aria-pressed="true"],.opt:hover{background:var(--sun)}
+#tailsvg{width:100%;max-width:240px;background:var(--sun);border-radius:50%}
+#tailpath{fill:none;stroke:var(--fur);stroke-linecap:round;transition:all .3s}
+#tailpath.wag{animation:wag .25s ease-in-out infinite alternate;transform-origin:30px 110px}
+@keyframes wag{to{transform:rotate(-14deg)}}
+
+.voice{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.voice button{font:800 1.1rem "Baloo 2",sans-serif;border:3px solid var(--ink);border-radius:99px;padding:8px 20px;cursor:pointer;background:var(--sun);color:var(--ink)}
+.voice button[aria-pressed="true"]{background:var(--pink)}
+#vtext{background:#fff;border:3px solid var(--ink);border-radius:22px;padding:16px 20px;max-width:60ch}
+
+.quiz{background:#fff;border:3px solid var(--ink);border-radius:32px;padding:26px;box-shadow:8px 8px 0 var(--pink);max-width:640px}
+.quiz h3{font-size:1.6rem;margin-bottom:12px}
+.opts{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.prog{font-weight:700;margin-bottom:6px}
+.res .em{font-size:3.4rem}
+
+.dd{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.dd ul{margin:8px 0 0;padding-left:20px}
+.good{--c:var(--mint)}.bad{--c:var(--pink)}
+.facts{display:flex;flex-wrap:wrap;gap:14px}
+.fact{flex:1 1 200px;background:var(--sun);border:3px solid var(--ink);border-radius:24px;padding:18px 20px}
+.fact b{display:block;font:800 2.2rem "Baloo 2",sans-serif;line-height:1}
+footer{padding:50px 0 40px;text-align:center}
+footer .em{font-size:2rem}
+html body,html body *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cpath d='M5 15 L6 3 L15 9Z M31 15 L30 3 L21 9Z' fill='%23FF9A3C' stroke='%233B2E7E' stroke-width='2' stroke-linejoin='round'/%3E%3Cellipse cx='18' cy='21' rx='14' ry='12' fill='%23FF9A3C' stroke='%233B2E7E' stroke-width='2'/%3E%3Ccircle cx='12' cy='19' r='2.2' fill='%233B2E7E'/%3E%3Ccircle cx='24' cy='19' r='2.2' fill='%233B2E7E'/%3E%3Cpath d='M16 23 H20 L18 25Z' fill='%23FF6FB1'/%3E%3C/svg%3E") 18 18,auto!important}
+html body a,html body a *,html body button,html body button *,html body #cat,html body #cat *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cpath d='M5 15 L6 3 L15 9Z M31 15 L30 3 L21 9Z' fill='%23FF6FB1' stroke='%233B2E7E' stroke-width='2' stroke-linejoin='round'/%3E%3Cellipse cx='18' cy='21' rx='14' ry='12' fill='%23FF6FB1' stroke='%233B2E7E' stroke-width='2'/%3E%3Cpath d='M9 20 Q12 16 15 20 M21 20 Q24 16 27 20' fill='none' stroke='%233B2E7E' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M16 23 H20 L18 25Z' fill='%23FFF6B8'/%3E%3Cpath d='M15 27 Q18 30 21 27' fill='none' stroke='%233B2E7E' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") 18 18,pointer!important}
+.pawfx{position:fixed;pointer-events:none;z-index:50;font-size:1.6rem;animation:paw .9s ease-out forwards}
+@keyframes paw{to{transform:translateY(-50px) scale(1.4);opacity:0}}
+#cat.hop{animation:hop .5s ease-out}
+@keyframes hop{30%{transform:translateY(-26px) rotate(-3deg)}60%{transform:translateY(0) scaleY(.94)}}
+button.card[aria-expanded="true"] .em{animation:wig .6s}
+@keyframes wig{25%{transform:rotate(-18deg) scale(1.2)}75%{transform:rotate(18deg) scale(1.2)}}
+.meter{display:flex;align-items:center;gap:12px;margin-bottom:22px;font-weight:700;flex-wrap:wrap}
+.bar{flex:1;min-width:140px;max-width:320px;height:18px;background:#fff;border:3px solid var(--ink);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--pink);transition:width .4s}
+.face{transition:transform .2s}
+button.card:hover .face{transform:rotate(-6deg) scale(1.08)}
+.stat{display:none;margin-top:8px;padding-top:8px;border-top:3px dashed var(--ink)}
+button.card[aria-expanded="true"] .stat{display:block}
+.card:not(button){transition:transform .15s}
+.card:not(button):hover{transform:translateY(-4px) rotate(1deg)}
+@media (max-width:760px){.hero .wrap,.tailsec,.dd{grid-template-columns:1fr}.tailsec{justify-items:center}nav b{width:100%}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav><div class="wrap"><b>🐱 Meong!</b><a href="#tingkah">Tingkah</a><a href="#ekor">Ekor</a><a href="#suara">Suara</a><a href="#ras">Ras</a><a href="#kuis">Kuis</a><a href="#rawat">Rawat</a></div></nav>
+
+<header class="hero">
+  <span class="dot" style="width:220px;height:220px;background:var(--pink);left:-70px;top:-60px;opacity:.55"></span>
+  <span class="dot" style="width:160px;height:160px;background:var(--sky);right:-40px;bottom:-50px;opacity:.6"></span>
+  <div class="wrap">
+    <div>
+      <h1>Halo, manusia. Ayo kenalan sama kucing.</h1>
+      <p>Kenapa dia menguleni selimut, menatap tembok, atau tiba-tiba lari tengah malam? Semua ada artinya. Yuk, terjemahkan.</p>
+      <a class="btn" href="#tingkah">Mulai menerjemahkan</a>
+    </div>
+    <div class="catbox">
+      <div class="bubble" id="bubble">purrrr...</div>
+      <svg id="cat" viewBox="0 0 400 400" role="img" aria-label="Kucing oranye yang matanya mengikuti kursor. Ketuk untuk mengelusnya.">
+        <circle cx="200" cy="210" r="175" fill="#FF6FB1"/>
+        <path class="tail" d="M300 330 C380 330 390 240 350 215" fill="none" stroke="#FF9A3C" stroke-width="26" stroke-linecap="round"/>
+        <ellipse cx="200" cy="340" rx="100" ry="64" fill="#FF9A3C"/>
+        <path d="M110 150 L120 60 L180 105Z M290 150 L280 60 L220 105Z" fill="#FF9A3C" stroke="#3B2E7E" stroke-width="6" stroke-linejoin="round"/>
+        <path d="M128 112 L131 82 L156 102Z M272 112 L269 82 L244 102Z" fill="#FFD3E8"/>
+        <ellipse cx="200" cy="190" rx="105" ry="92" fill="#FF9A3C" stroke="#3B2E7E" stroke-width="6"/>
+        <path d="M200 100 V135 M172 106 L178 134 M228 106 L222 134" stroke="#E57A1A" stroke-width="10" stroke-linecap="round"/>
+        <ellipse cx="200" cy="222" rx="50" ry="38" fill="#FFF6B8"/>
+        <circle cx="140" cy="222" r="14" fill="#FF6FB1" opacity=".5"/><circle cx="260" cy="222" r="14" fill="#FF6FB1" opacity=".5"/>
+        <g class="blink"><circle cx="158" cy="180" r="26" fill="#fff" stroke="#3B2E7E" stroke-width="5"/><circle cx="242" cy="180" r="26" fill="#fff" stroke="#3B2E7E" stroke-width="5"/>
+        <circle id="pl" cx="158" cy="180" r="12" fill="#3B2E7E"/><circle id="pr" cx="242" cy="180" r="12" fill="#3B2E7E"/></g>
+        <path d="M188 208 H212 L200 222Z" fill="#FF6FB1" stroke="#3B2E7E" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M200 222 V232 M200 232 C190 244 176 242 172 234 M200 232 C210 244 224 242 228 234" fill="none" stroke="#3B2E7E" stroke-width="4" stroke-linecap="round"/>
+        <path d="M130 215 L80 205 M130 228 L80 236 M270 215 L320 205 M270 228 L320 236" stroke="#3B2E7E" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="150" cy="392" rx="30" ry="14" fill="#FFF6B8" stroke="#3B2E7E" stroke-width="5"/><ellipse cx="250" cy="392" rx="30" ry="14" fill="#FFF6B8" stroke="#3B2E7E" stroke-width="5"/>
+      </svg>
+      <div class="hint">Gerakkan kursor, lalu ketuk si oranye untuk mengelusnya.</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="face" viewBox="0 0 200 200">
+<path d="M30 80 L36 20 L84 52Z M170 80 L164 20 L116 52Z" fill="var(--e,var(--f))" stroke="#3B2E7E" stroke-width="5" stroke-linejoin="round"/>
+<ellipse cx="100" cy="106" rx="76" ry="66" fill="var(--f)" stroke="#3B2E7E" stroke-width="5"/>
+<ellipse cx="100" cy="132" rx="34" ry="26" fill="var(--m,#FFF6B8)"/>
+<circle cx="72" cy="98" r="11" fill="#fff" stroke="#3B2E7E" stroke-width="4"/><circle cx="128" cy="98" r="11" fill="#fff" stroke="#3B2E7E" stroke-width="4"/>
+<circle cx="72" cy="99" r="5" fill="var(--eye,#3B2E7E)" style="transform:translate(var(--px,0px),var(--py,0px))"/><circle cx="128" cy="99" r="5" fill="var(--eye,#3B2E7E)" style="transform:translate(var(--px,0px),var(--py,0px))"/>
+<path d="M92 120 H108 L100 130Z" fill="#FF6FB1" stroke="#3B2E7E" stroke-width="3" stroke-linejoin="round"/>
+<path d="M100 130 V136 M100 136 C94 144 84 142 82 137 M100 136 C106 144 116 142 118 137" fill="none" stroke="#3B2E7E" stroke-width="3" stroke-linecap="round"/>
+<path d="M66 128 L34 122 M66 136 L34 144 M134 128 L166 122 M134 136 L166 144" stroke="#3B2E7E" stroke-width="3" stroke-linecap="round"/>
+</symbol></defs></svg>
+
+<div class="wrap">
+  <section id="tingkah" class="band1"><div class="wrap">
+    <h2>Tingkah aneh, arti sebenarnya</h2>
+    <p class="lead">Ketuk kartu untuk melihat apa yang sebenarnya ingin disampaikan kucingmu. Buka semuanya untuk jadi fasih bahasa kucing.</p>
+    <div class="meter"><span id="mtxt" aria-live="polite">Dipahami: 0 dari 8</span><div class="bar"><i id="mbar"></i></div></div>
+    <div class="grid" id="tgrid"></div>
+  </div></section>
+
+  <section id="ekor"><h2>Baca bahasa ekornya</h2>
+    <p class="lead">Ekor adalah papan status kucing. Pilih posisi untuk melihat artinya.</p>
+    <div class="tailsec">
+      <svg id="tailsvg" viewBox="0 0 120 120" role="img" aria-label="Ilustrasi posisi ekor kucing">
+        <ellipse cx="30" cy="116" rx="26" ry="14" fill="#FF9A3C"/>
+        <path id="tailpath" d="M30 110 C30 70 30 40 30 15" stroke-width="12"/>
+      </svg>
+      <div>
+        <div class="tabs" id="tabs"></div>
+        <h3 id="ttitle"></h3>
+        <p id="tdesc" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="suara" class="band2"><div class="wrap">
+    <h2>Kamus suara kucing</h2>
+    <p class="lead">Kucing dewasa jarang mengeong ke sesama kucing. Suara itu khusus untuk manusia. Pilih suaranya.</p>
+    <div class="voice" id="voice"></div>
+    <p id="vtext" aria-live="polite"></p>
+  </div></section>
+
+  <section id="ras"><h2>Kenali rasnya</h2>
+    <p class="lead">Dari kucing kampung sampai si berbulu tebal. Lihat, matanya mengikuti kursormu! Ketuk kartu untuk melihat tingkat energi dan manjanya.</p>
+    <div class="grid" id="rgrid"></div>
+  </section>
+
+  <section id="kuis" class="band4"><div class="wrap">
+    <h2>Kuis: kamu tipe kucing yang mana?</h2>
+    <p class="lead">Tiga pertanyaan singkat, tanpa jawaban salah.</p>
+    <div class="quiz" id="quiz"></div>
+  </div></section>
+
+  <section id="rawat"><h2>Merawat kucing dengan benar</h2>
+    <p class="lead">Kucing tidak bisa bilang kalau perutnya sakit, jadi kita yang perlu tahu.</p>
+    <div class="grid" id="care"></div>
+    <div class="dd" style="margin-top:22px">
+      <div class="card good"><h3>✅ Aman diberikan</h3><ul><li>Makanan kucing berkualitas</li><li>Air bersih setiap hari</li><li>Sedikit ikan atau ayam matang tanpa bumbu</li><li>Rumput kucing untuk dikunyah</li></ul></div>
+      <div class="card bad"><h3>⛔ Hindari</h3><ul><li>Cokelat, bawang, dan bawang putih</li><li>Anggur dan kismis</li><li>Tulang ayam matang</li><li>Susu sapi, banyak kucing sulit mencernanya</li></ul></div>
+    </div>
+  </section>
+
+  <section class="band3"><div class="wrap">
+    <h2>Angka-angka kucing</h2>
+    <div class="facts">
+      <div class="fact"><b>12–16 jam</b>tidur sehari. Pekerjaan utama mereka.</div>
+      <div class="fact"><b>18 jari</b>pada kucing biasa: 5 di kaki depan, 4 di kaki belakang.</div>
+      <div class="fact"><b>±100</b>jenis suara yang bisa dibuat kucing, lebih banyak dari anjing.</div>
+      <div class="fact"><b>Kumis</b>berfungsi seperti sensor untuk mengukur celah sempit.</div>
+    </div>
+  </div></section>
+</div>
+</main>
+
+<footer class="wrap">
+  <div class="em">🐾</div>
+  <p>Dibuat dengan sayang untuk semua pencinta kucing. Jangan lupa beri makan dan elus mereka hari ini.</p>
+</footer>
+
+<script>
+function $(i){return document.getElementById(i)}
+var T=[["🍞","Menguleni","Sisa kebiasaan masa bayi saat menekan perut induk untuk memancing susu. Kalau dia menguleni kamu, artinya dia merasa aman dan nyaman."],
+["😽","Kedip pelan","Kedipan lambat adalah “ciuman kucing”. Balas dengan kedip pelan juga, dia akan tahu kamu bersahabat."],
+["🤗","Sundulan kepala","Dia menandaimu dengan kelenjar aroma di pipi dan dahi. Artinya: kamu bagian dari keluargaku."],
+["🏃","Zoomies","Lari kencang tiba-tiba, biasanya malam hari. Cara kucing membuang energi berlebih, dan biasanya normal."],
+["🎁","Membawa hadiah","Tikus, mainan, atau sandal. Naluri berburu membuatnya ingin berbagi hasil buruan dengan keluarga."],
+["📦","Duduk di kardus","Ruang sempit terasa hangat dan aman. Kardus jadi tempat sembunyi sekaligus pos pengintaian."],
+["🥛","Menjatuhkan barang","Dia menguji benda itu: bergerak atau tidak? Sekalian mencari perhatianmu."],
+["🚽","Menatap kosong","Telinganya menangkap bunyi yang tidak terdengar olehmu, atau dia sedang mengamati serangga kecil."]];
+T.forEach(function(t,i){var b=document.createElement("button");b.className="card c"+(i%6);b.setAttribute("aria-expanded","false");
+b.innerHTML='<span class="em">'+t[0]+'</span><h3>'+t[1]+'</h3><div class="arti">'+t[2]+'</div>';
+b.onclick=function(){var o=b.getAttribute("aria-expanded")==="true";b.setAttribute("aria-expanded",o?"false":"true");window.S=window.S||{};if(!o){S[i]=1;var c=Object.keys(S).length;$("mbar").style.width=c/T.length*100+"%";$("mtxt").textContent=c<T.length?"Dipahami: "+c+" dari "+T.length:"Kamu fasih bahasa kucing! 🎉"}};$("tgrid").appendChild(b)});
+T[7][0]="👀";
+
+var P=[["Tegak lurus","Kucing senang dan percaya diri. Biasanya dia menyapamu begini.","M30 110 C30 70 30 40 30 15",12,0],
+["Ujung melengkung","Seperti tanda tanya: dia penasaran dan ramah. Ajak main sekarang.","M30 110 C30 60 30 25 55 20 C72 17 78 38 62 42",12,0],
+["Mengibas cepat","Hati-hati, dia kesal atau terganggu. Beri ruang dulu.","M30 110 C30 70 30 40 30 15",12,1],
+["Mengembang","Dia takut atau kaget dan ingin tampak besar. Jangan dipegang, tenangkan suasana.","M30 110 C20 70 40 40 30 15",26,0],
+["Melingkar","Santai dan hangat, atau sedang menjaga diri. Tandanya siap tidur.","M30 110 C85 120 108 92 86 78 C70 68 52 84 68 96",12,0]];
+var tp=$("tailpath");
+P.forEach(function(p,i){var b=document.createElement("button");b.textContent=p[0];b.setAttribute("aria-pressed","false");
+b.onclick=function(){$("tabs").querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");
+tp.setAttribute("d",p[2]);tp.setAttribute("stroke-width",p[3]);tp.classList.toggle("wag",!!p[4]);
+$("ttitle").textContent=p[0];$("tdesc").textContent=p[1]};$("tabs").appendChild(b);if(i===0)b.click()});
+
+var V=[["Meong","Permintaan langsung ke manusia: lapar, minta dibukakan pintu, atau ingin ditemani."],
+["Purr (dengkur)","Biasanya tanda puas. Tapi kucing juga mendengkur untuk menenangkan diri saat sakit atau cemas."],
+["Chirp (kicau)","Bunyi seperti burung saat melihat mangsa dari jendela. Campuran semangat dan gemas."],
+["Desis","Peringatan keras: mundur sekarang. Jangan didekati."],
+["Menggeram","Dia terganggu atau terancam. Beri jarak dan jangan dipaksa."]];
+V.forEach(function(v,i){var b=document.createElement("button");b.textContent=v[0];b.setAttribute("aria-pressed","false");
+b.onclick=function(){$("voice").querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");$("vtext").textContent=v[1]};$("voice").appendChild(b);if(i===0)b.click()});
+
+var R=[["Kucing Kampung","#FF9A3C","","","Tangguh, pintar, dan sehat. Warnanya beragam, kepribadiannya seru."],
+["Persia","#FFF6B8","","#FFE1C2","Bulu panjang, wajah pesek, tenang. Perlu disisir setiap hari."],
+["Siam","#FFEBC8","#7A5543","#7A5543","Mata biru, telinga dan wajah gelap. Cerewet dan suka ditemani."],
+["Maine Coon","#B58B63","","#E8D2B8","Raksasa lembut. Bisa mencapai 8 kg lebih dan ramah pada keluarga."],
+["British Shorthair","#9DB4D6","","#D6E2F5","Pipi bulat, bulu tebal, tenang. Suka santai dan tidak terlalu manja."],
+["Anggora","#FFFFFF","","#F3F3F3","Bulu halus dan panjang, lincah, sering matanya berbeda warna."]];
+var RT=[[3,2],[1,5],[4,5],[3,4],[2,3],[4,4]];function P5(n){return "🐾".repeat(n)+"○".repeat(5-n)}
+R.forEach(function(r,i){var d=document.createElement("button");d.className="card c"+i;d.setAttribute("aria-expanded","false");d.onclick=function(){d.setAttribute("aria-expanded",d.getAttribute("aria-expanded")==="true"?"false":"true")};
+d.innerHTML='<svg class="face" style="--f:'+r[1]+(r[2]?';--e:'+r[2]:'')+(r[3]?';--m:'+r[3]:'')+(i==2?';--eye:#4FA8FF':'')+'" aria-hidden="true"><use href="#face"/></svg><h3>'+r[0]+'</h3><p>'+r[4]+'</p><div class="stat">Energi: '+P5(RT[i][0])+'<br>Manja: '+P5(RT[i][1])+'</div>';$("rgrid").appendChild(d)});
+
+var C=[["🍗","Makan teratur","Dewasa makan 2 kali sehari. Pilih makanan khusus kucing karena butuh taurin."],
+["💧","Air selalu ada","Ganti air setiap hari. Kucing sering lebih suka air mengalir."],
+["🧶","Waktu main","Main 10–15 menit dua kali sehari dengan tali atau mainan pancing."],
+["🩺","Dokter hewan","Vaksin dan cek rutin setahun sekali. Steril membantu kesehatannya."]];
+C.forEach(function(c,i){var d=document.createElement("div");d.className="card c"+((i+1)%6);d.innerHTML='<span style="font-size:2.4rem">'+c[0]+'</span><h3>'+c[1]+'</h3><p>'+c[2]+'</p>';$("care").appendChild(d)});
+
+var Q=[["Hari Minggu idealmu?",["Jalan-jalan ke tempat baru","Rebahan seharian","Ngobrol dan dimanjakan orang tersayang"]],
+["Camilan favoritmu?",["Apa saja, asal baru","Yang praktis, tinggal ambil","Yang dibuatkan orang lain"]],
+["Kalau ada tamu datang?",["Langsung menyambut","Lihat dari jauh dulu","Menempel ke orang favoritku"]]];
+var RS=[["🧭","Si Penjelajah","Kamu seperti kucing yang penasaran, lincah, dan jago memanjat. Rumah sempit tidak cukup untukmu."],
+["👑","Si Raja Rebahan","Kamu kucing yang tahu cara menikmati hidup. Sinar matahari dan sofa adalah singgasanamu."],
+["💞","Si Manja","Kamu kucing penyayang yang selalu ingin dekat. Pangkuan adalah rumah terbaik."]];
+var qi=0,sc=[0,0,0];
+function rq(){var q=$("quiz");if(qi>=Q.length){var m=sc.indexOf(Math.max.apply(null,sc)),r=RS[m];
+q.innerHTML='<div class="res"><div class="em">'+r[0]+'</div><h3>'+r[1]+'</h3><p>'+r[2]+'</p><button class="opt" id="rs">Ulangi kuis</button></div>';
+$("rs").onclick=function(){qi=0;sc=[0,0,0];rq()};return}
+q.innerHTML='<div class="prog">Pertanyaan '+(qi+1)+' dari '+Q.length+'</div><h3>'+Q[qi][0]+'</h3><div class="opts"></div>';
+Q[qi][1].forEach(function(o,j){var b=document.createElement("button");b.className="opt";b.textContent=o;b.onclick=function(){sc[j]++;qi++;rq()};q.querySelector(".opts").appendChild(b)})}
+rq();
+
+var pl=$("pl"),pr=$("pr"),cat=$("cat");
+document.addEventListener("pointermove",function(e){var r=cat.getBoundingClientRect();
+[[pl,158],[pr,242]].forEach(function(a){var cx=r.left+a[1]/400*r.width,cy=r.top+180/400*r.height;
+var dx=e.clientX-cx,dy=e.clientY-cy,d=Math.hypot(dx,dy)||1,m=Math.min(10,d/20);
+a[0].setAttribute("cx",a[1]+dx/d*m);a[0].setAttribute("cy",180+dy/d*m)});
+document.querySelectorAll(".face").forEach(function(f){var q=f.getBoundingClientRect(),x=e.clientX-(q.left+q.width/2),y=e.clientY-(q.top+q.height/2),dd=Math.hypot(x,y)||1;f.style.setProperty("--px",x/dd*3+"px");f.style.setProperty("--py",y/dd*3+"px")})});
+var W=["purrrr...","meong!","mrrrow?","brrrp~","nyam nyam"],n=0,tm;
+cat.addEventListener("click",function(){cat.classList.remove("hop");void cat.getBoundingClientRect();cat.classList.add("hop");var b=$("bubble");b.textContent=W[n++%W.length];b.classList.add("on");clearTimeout(tm);tm=setTimeout(function(){b.classList.remove("on")},1600)});
+document.addEventListener("click",function(e){var s=document.createElement("span");s.className="pawfx";s.textContent="🐾";s.style.left=e.clientX-12+"px";s.style.top=e.clientY-12+"px";document.body.appendChild(s);setTimeout(function(){s.remove()},900)});
+</script>
+</body>
+</html>
